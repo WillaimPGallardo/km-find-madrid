@@ -194,6 +194,62 @@ footer{background:#2B1A10;color:#F4EAE2}
 .fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:25;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgb(0 0 0 / .22)}
 .fab svg{width:30px;height:30px}
 
+/* Etiquetas */
+.item .ph{position:relative}
+.badge{position:absolute;top:10px;left:10px;font:600 10px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:#5C3317;color:#FAF6F2}
+.badge.nuevo{background:#B38B5D}
+.badge.ultimas{background:#9B2C2C}
+.ask{border:0;cursor:pointer}
+.ask.added{background:var(--gold)}
+
+/* Carrito */
+.cartbtn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--brown);cursor:pointer;flex:none}
+.cartbtn svg{width:20px;height:20px}
+.cartbtn .n{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:999px;background:var(--gold);color:#fff;font:600 11px/20px var(--body);text-align:center;padding:0 5px}
+.right{display:flex;align-items:center;gap:10px}
+.scrim{position:fixed;inset:0;background:rgb(20 12 8 / .45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:41;background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dh h2{font-size:28px}
+.x{background:none;border:0;font-size:26px;line-height:1;color:var(--muted);cursor:pointer;padding:6px}
+.lines{flex:1;overflow:auto;padding:8px 20px}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.line img{width:64px;height:64px;object-fit:contain;background:var(--mat);border-radius:4px}
+.line b{font-family:var(--display);font-weight:400;font-size:16px;color:var(--brown);display:block;line-height:1.2}
+.line small{color:var(--muted);font-size:12px;display:block}
+.line .pr{font-weight:600;font-size:13px;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:4px;margin-top:6px}
+.qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:14px;line-height:1}
+.qty span{min-width:20px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.rm{background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;padding:4px 0}
+.df{border-top:1px solid var(--line);padding:18px 20px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.tot{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted)}
+.tot.big{font-size:18px;color:var(--ink);font-weight:600}
+.df .btn{width:100%}
+.df p{margin:0;font-size:12px;color:var(--muted);text-align:center}
+.cempty{text-align:center;padding:48px 8px;color:var(--muted)}
+.cempty b{display:block;font-family:var(--display);font-weight:400;font-size:24px;color:var(--brown);margin-bottom:6px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;font-size:13px;z-index:50;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis}
+.toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto;cursor:pointer}
+
+/* Sobre pedido */
+.special .in{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.special form{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.field input,.field select,.field textarea{font:15px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:12px 14px;width:100%}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.special form .btn{grid-column:1/-1}
+.ferr{grid-column:1/-1;color:#9B2C2C;font-size:13px;margin:0}
+.special ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+.special li{display:flex;gap:12px;color:var(--muted)}
+.special li::before{content:"✦";color:var(--gold)}
+@media (max-width:820px){.special .in{grid-template-columns:1fr;gap:28px}.special form{grid-template-columns:1fr;padding:20px}}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -202,6 +258,7 @@ footer{background:#2B1A10;color:#F4EAE2}
   <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.8 2c0 1.2.9 2.3 1 2.5s1.7 2.6 4.1 3.6c1.5.7 2.1.7 2.9.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.5-.3z"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
   <symbol id="i-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
 </defs></svg>
 
@@ -214,10 +271,14 @@ footer{background:#2B1A10;color:#F4EAE2}
     <nav aria-label="Secciones">
       <a href="#categorias">Categorías</a>
       <a href="#catalogo">Catálogo</a>
+      <a href="#sobre-pedido">Sobre pedido</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
-    <a class="btn btn-solid js-wa" href="#" data-msg="Hola KM Find Madrid, quiero hacer un pedido"><svg><use href="#i-wa"/></svg><span>Pedir por WhatsApp</span></a>
+    <div class="right">
+      <button class="cartbtn" id="cartOpen" aria-label="Ver mi pedido"><svg><use href="#i-cart"/></svg><span class="n" id="cartCount" hidden>0</span></button>
+      <a class="btn btn-solid js-wa" href="#" data-msg="Hola KM Find Madrid, quiero hacer un pedido"><svg><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+    </div>
   </div>
 </header>
 
@@ -267,7 +328,7 @@ footer{background:#2B1A10;color:#F4EAE2}
   <section class="catalog" id="catalogo">
     <div class="wrap">
       <div class="head">
-        <div><p class="eyebrow">Catálogo</p><h2>Modelos y precios</h2><p class="sub">Precios en pesos colombianos. Toca "Lo quiero" y nos llega tu pedido por WhatsApp con el producto ya escrito.</p></div>
+        <div><p class="eyebrow">Catálogo</p><h2>Modelos y precios</h2><p class="sub">Precios en pesos colombianos. Agrega lo que te guste a tu pedido y envíanoslo completo por WhatsApp.</p></div>
       </div>
       <div class="controls">
         <div class="tabs" role="group" aria-label="Filtrar por categoría" id="tabs"></div>
@@ -275,6 +336,31 @@ footer{background:#2B1A10;color:#F4EAE2}
       </div>
       <div class="grid" id="grid"></div>
       <p class="note">¿No ves lo que buscas? Mándanos el nombre o una foto del producto y te damos precio y disponibilidad.</p>
+    </div>
+  </section>
+
+  <section class="special" id="sobre-pedido">
+    <div class="wrap in">
+      <div>
+        <p class="eyebrow">Pedidos especiales</p>
+        <h2 style="font-size:clamp(34px,4.6vw,54px);margin-top:10px">¿Buscas algo que no está aquí?</h2>
+        <p style="color:var(--muted);max-width:44ch;margin:14px 0 0">Cuéntanos qué quieres y lo buscamos en las tiendas de España. Te respondemos con disponibilidad y precio en pesos.</p>
+        <ul>
+          <li>Ropa, makeup, skincare, accesorios y más marcas</li>
+          <li>Puedes mandarnos el enlace o una foto del producto</li>
+          <li>Cotizar no tiene costo</li>
+        </ul>
+      </div>
+      <form id="special" novalidate>
+        <div class="field"><label for="sp-nombre">Tu nombre</label><input id="sp-nombre" autocomplete="name" placeholder="Ej: Laura"></div>
+        <div class="field"><label for="sp-ciudad">Ciudad en Colombia</label><input id="sp-ciudad" autocomplete="address-level2" placeholder="Ej: Bogotá"></div>
+        <div class="field"><label for="sp-cat">Categoría</label><select id="sp-cat"><option>Bolso</option><option>Perfume</option><option>Zapatillas</option><option>Pandora</option><option>Ropa</option><option>Makeup</option><option>Skincare</option><option>Otro</option></select></div>
+        <div class="field"><label for="sp-marca">Marca</label><input id="sp-marca" placeholder="Ej: Zara, Mango, Rituals"></div>
+        <div class="field full"><label for="sp-que">¿Qué buscas?</label><textarea id="sp-que" placeholder="Modelo, color, talla o tamaño"></textarea></div>
+        <div class="field full"><label for="sp-link">Enlace o referencia (opcional)</label><input id="sp-link" placeholder="Pega aquí el enlace del producto"></div>
+        <p class="ferr" id="sp-err" hidden>Cuéntanos qué buscas para poder cotizarlo.</p>
+        <a class="btn btn-solid" id="sp-send" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Enviar por WhatsApp</a>
+      </form>
     </div>
   </section>
 
@@ -336,6 +422,19 @@ footer{background:#2B1A10;color:#F4EAE2}
   <div class="wrap copy">© 2026 KM Find Madrid · Todos los derechos reservados</div>
 </footer>
 
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mi pedido" aria-hidden="true">
+  <div class="dh"><h2>Mi pedido</h2><button class="x" id="cartClose" aria-label="Cerrar">×</button></div>
+  <div class="lines" id="lines"></div>
+  <div class="df" id="cartFoot" hidden>
+    <div class="tot"><span>Total</span><span id="tTotal"></span></div>
+    <div class="tot big"><span>Para confirmar (50%)</span><span id="tHalf"></span></div>
+    <a class="btn btn-solid" id="cartSend" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Enviar pedido por WhatsApp</a>
+    <p>Te confirmamos disponibilidad antes de pagar.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
 <a class="fab js-wa" href="#" data-msg="Hola KM Find Madrid" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
 
 <script>
@@ -344,7 +443,7 @@ const WHATSAPP = "";
 const IG = "https://www.instagram.com/kmfind_madrid/";
 
 const P = [
-  {c:"bolsos", b:"Michael Kors", n:"Bandolera Gigi", img:"bolso1", p:580000},
+  {c:"bolsos", b:"Michael Kors", n:"Bandolera Gigi", img:"bolso1", tag:"Más pedido", p:580000},
   {c:"bolsos", b:"Michael Kors", n:"Pochette Jet Set", img:"bolso2", p:400000},
   {c:"bolsos", b:"Guess", n:"Bolso Hobo Evie", img:"bolso3", p:490000},
   {c:"bolsos", b:"Guess", n:"Bolso Isabel", img:"bolso4", p:420000},
@@ -368,34 +467,37 @@ const P = [
   {c:"zapatillas", b:"Salomon", n:"XT-Whisper Void", img:"salomon4", p:700000},
   {c:"zapatillas", b:"Salomon", n:"Ultra Glide 4", img:"salomon5", p:700000},
   {c:"zapatillas", b:"Salomon", n:"XT-6 Expanse", img:"salomon6", p:680000},
-  {c:"pandora", b:"Pandora", n:"Pulsera Moments cierre de corazón", img:"pandora1", s:[["Plata",380000]]},
+  {c:"pandora", tag:"Nuevo", b:"Pandora", n:"Pulsera Moments cierre de corazón", img:"pandora1", s:[["Plata",380000]]},
   {c:"pandora", b:"Pandora", n:"Pulsera Moments cadena de serpiente", img:"pandora2", s:[["Dorada",530000]]},
   {c:"pandora", b:"Pandora", n:"Pulsera tejido de serpiente", img:"pandora3", s:[["Dorada, cierre corazón",660000,"pandora3"],["Rosa, cierre redondo",660000,"pandora4"]]},
-  {c:"pandora", b:"Pandora", n:"Charm Flor mágica de Rapunzel", sub:"Brilla en la oscuridad", img:"pandora5", p:510000},
+  {c:"pandora", tag:"Nuevo", b:"Pandora", n:"Charm Flor mágica de Rapunzel", sub:"Brilla en la oscuridad", img:"pandora5", p:510000},
   {c:"pandora", b:"Pandora", n:"Charm Oso Lotso", img:"pandora6", p:430000},
   {c:"pandora", b:"Pandora", n:"Charm Winnie Pooh", img:"pandora7", p:415000},
 ];
+// Etiquetas disponibles: "Más pedido", "Nuevo", "Últimas unidades" (campo tag de cada producto).
 const CATS = [["todo","Todo"],["bolsos","Bolsos"],["zapatillas","Zapatillas"],["perfumes","Perfumes"],["pandora","Pandora"]];
-const fmt = n => "$" + n.toLocaleString("es-CO").replace(/,/g,".");
+const fmt = n => "$" + Math.round(n).toLocaleString("es-CO").replace(/,/g,".");
 const waLink = msg => WHATSAPP ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}` : IG;
-const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const tagClass = t => ({"Nuevo":"nuevo","Últimas unidades":"ultimas"})[t] || "";
+const variant = (p,k) => p.s ? {label:p.s[k][0], price:p.s[k][1], img:p.s[k][2]||p.img} : {label:"", price:p.p, img:p.img};
 
+/* ---------- Catálogo ---------- */
 let cat = "todo", q = "";
 const tabs = document.getElementById("tabs"), grid = document.getElementById("grid"), qi = document.getElementById("q");
 tabs.innerHTML = CATS.map(([k,l]) => `<button class="tab" id="f-${k}" data-f="${k}" aria-pressed="${k===cat}">${l}<span class="c">${k==="todo"?P.length:P.filter(p=>p.c===k).length}</span></button>`).join("");
 
 function card(p, i){
-  const sizes = p.s || null, price = sizes ? sizes[0][1] : p.p, size = sizes ? sizes[0][0] : "";
-  const msg = `Hola, me interesa: ${p.n} de ${p.b}${size?" ("+size+")":""} - ${fmt(price)}`;
-  return `<article class="item" data-i="${i}">
-    <div class="ph"><img src="img/${p.img}.jpg" alt="${esc(p.n)} de ${esc(p.b)}" loading="lazy"></div>
+  const v = variant(p,0), sizes = p.s;
+  return `<article class="item" data-i="${i}" data-k="0">
+    <div class="ph">${p.tag?`<span class="badge ${tagClass(p.tag)}">${esc(p.tag)}</span>`:""}<img src="img/${v.img}.jpg" alt="${esc(p.n)} de ${esc(p.b)}" loading="lazy"></div>
     <div class="bd">
       <span class="br">${esc(p.b)}</span>
       <h3>${esc(p.n)}</h3>${p.sub?`<span class="sub2">${esc(p.sub)}</span>`:""}
-      ${sizes && sizes.length>1 ? `<div class="sizes">${sizes.map((s,k)=>`<button class="size" data-k="${k}" aria-pressed="${k===0}">${s[0]}</button>`).join("")}</div>` : sizes ? `<div class="sizes"><span class="size" aria-pressed="true">${sizes[0][0]}</span></div>` : ""}
-      <div class="ft"><span class="price">${fmt(price)}<small>COP</small></span>
-      <a class="ask" target="_blank" rel="noopener" href="${esc(waLink(msg))}"><svg><use href="#i-wa"/></svg>Lo quiero</a></div>
+      ${sizes && sizes.length>1 ? `<div class="sizes">${sizes.map((s,k)=>`<button class="size" data-k="${k}" aria-pressed="${k===0}">${esc(s[0])}</button>`).join("")}</div>` : sizes ? `<div class="sizes"><span class="size" aria-pressed="true">${esc(sizes[0][0])}</span></div>` : ""}
+      <div class="ft"><span class="price">${fmt(v.price)}<small>COP</small></span>
+      <button class="ask" data-add><svg><use href="#i-cart"/></svg>Agregar</button></div>
     </div></article>`;
 }
 function render(){
@@ -408,16 +510,84 @@ function setCat(k){ cat=k; tabs.querySelectorAll(".tab").forEach(b=>b.setAttribu
 tabs.addEventListener("click", e => { const b=e.target.closest(".tab"); if(b) setCat(b.dataset.f); });
 qi.addEventListener("input", () => { q = qi.value; render(); });
 grid.addEventListener("click", e => {
-  const b = e.target.closest("button.size"); if(!b) return;
-  const card = b.closest(".item"), p = P[+card.dataset.i], s = p.s[+b.dataset.k];
-  card.querySelectorAll("button.size").forEach(x=>x.setAttribute("aria-pressed", x===b));
-  card.querySelector(".price").innerHTML = `${fmt(s[1])}<small>COP</small>`;
-  if(s[2]) card.querySelector(".ph img").src = `img/${s[2]}.jpg`;
-  card.querySelector(".ask").href = waLink(`Hola, me interesa: ${p.n} de ${p.b} (${s[0]}) - ${fmt(s[1])}`);
+  const el = e.target.closest("button.size, button[data-add]"); if(!el) return;
+  const c = el.closest(".item"), i = +c.dataset.i, p = P[i];
+  if(el.matches(".size")){
+    const k = +el.dataset.k, v = variant(p,k);
+    c.dataset.k = k;
+    c.querySelectorAll("button.size").forEach(x=>x.setAttribute("aria-pressed", x===el));
+    c.querySelector(".price").innerHTML = `${fmt(v.price)}<small>COP</small>`;
+    c.querySelector(".ph img").src = `img/${v.img}.jpg`;
+  } else {
+    addToCart(i, +c.dataset.k);
+    el.classList.add("added"); el.innerHTML = `<svg><use href="#i-cart"/></svg>Agregado`;
+    setTimeout(()=>{ el.classList.remove("added"); el.innerHTML = `<svg><use href="#i-cart"/></svg>Agregar`; }, 1400);
+  }
 });
 document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => setCat(a.dataset.go)));
 document.querySelectorAll(".js-wa").forEach(a => { a.href = waLink(a.dataset.msg); a.target = "_blank"; a.rel = "noopener"; });
-render();
+
+/* ---------- Carrito ---------- */
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem("kmcart") || "[]").filter(x => P[x.i] && (!P[x.i].s || P[x.i].s[x.k])); } catch(e) { cart = []; }
+const save = () => { try { localStorage.setItem("kmcart", JSON.stringify(cart)); } catch(e) {} };
+const $ = id => document.getElementById(id);
+const drawer = $("drawer"), scrim = $("scrim"), toast = $("toast");
+let toastT;
+function showToast(t){ toast.textContent = t; toast.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(()=>toast.classList.remove("on"), 2200); }
+function addToCart(i,k){
+  const f = cart.find(x=>x.i===i && x.k===k);
+  f ? f.q++ : cart.push({i,k,q:1});
+  save(); drawCart();
+  const p = P[i], v = variant(p,k);
+  showToast(`Agregado: ${p.n}${v.label?" ("+v.label+")":""}`);
+}
+function cartMsg(){
+  const lines = cart.map(x => { const p=P[x.i], v=variant(p,x.k); return `• ${x.q} x ${p.n} - ${p.b}${v.label?" ("+v.label+")":""}: ${fmt(v.price*x.q)}`; });
+  const total = cart.reduce((a,x)=>a+variant(P[x.i],x.k).price*x.q,0);
+  return `Hola KM Find Madrid, quiero hacer este pedido:\n\n${lines.join("\n")}\n\nTotal: ${fmt(total)} COP\n¿Me confirmas disponibilidad?`;
+}
+function drawCart(){
+  const n = cart.reduce((a,x)=>a+x.q,0), total = cart.reduce((a,x)=>a+variant(P[x.i],x.k).price*x.q,0);
+  $("cartCount").hidden = !n; $("cartCount").textContent = n;
+  $("cartFoot").hidden = !n;
+  $("lines").innerHTML = n ? cart.map((x,j)=>{ const p=P[x.i], v=variant(p,x.k); return `<div class="line">
+      <img src="img/${v.img}.jpg" alt="">
+      <div><b>${esc(p.n)}</b><small>${esc(p.b)}${v.label?" · "+esc(v.label):""}</small>
+        <div class="qty"><button data-j="${j}" data-d="-1" aria-label="Quitar uno">−</button><span>${x.q}</span><button data-j="${j}" data-d="1" aria-label="Agregar uno">+</button></div></div>
+      <div style="text-align:right"><span class="pr">${fmt(v.price*x.q)}</span><br><button class="rm" data-rm="${j}">Quitar</button></div>
+    </div>`; }).join("") :
+    `<div class="cempty"><b>Tu pedido está vacío</b>Agrega productos del catálogo y envíanos todo en un solo mensaje.</div>`;
+  $("tTotal").textContent = fmt(total) + " COP";
+  $("tHalf").textContent = fmt(total/2) + " COP";
+  $("cartSend").href = waLink(cartMsg());
+}
+$("lines").addEventListener("click", e => {
+  const d = e.target.closest("[data-d]"), r = e.target.closest("[data-rm]");
+  if(d){ const x = cart[+d.dataset.j]; x.q += +d.dataset.d; if(x.q<1) cart.splice(+d.dataset.j,1); }
+  else if(r){ cart.splice(+r.dataset.rm,1); } else return;
+  save(); drawCart();
+});
+function openCart(on){ drawer.classList.toggle("on",on); scrim.classList.toggle("on",on); drawer.setAttribute("aria-hidden", !on); if(on) $("cartClose").focus(); }
+$("cartOpen").addEventListener("click", ()=>openCart(true));
+$("cartClose").addEventListener("click", ()=>openCart(false));
+scrim.addEventListener("click", ()=>openCart(false));
+document.addEventListener("keydown", e => { if(e.key==="Escape") openCart(false); });
+toast.addEventListener("click", ()=>openCart(true));
+
+/* ---------- Pedido especial ---------- */
+const sp = id => $("sp-"+id).value.trim();
+function spMsg(){
+  return `Hola KM Find Madrid, quiero cotizar un pedido especial:\n\n` +
+    [["Nombre",sp("nombre")],["Ciudad",sp("ciudad")],["Categoría",sp("cat")],["Marca",sp("marca")],["Qué busco",sp("que")],["Referencia",sp("link")]]
+      .filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`).join("\n");
+}
+function spUpdate(){ $("sp-send").href = waLink(spMsg()); if(sp("que")) $("sp-err").hidden = true; }
+$("special").addEventListener("input", spUpdate);
+$("special").addEventListener("submit", e => e.preventDefault());
+$("sp-send").addEventListener("click", e => { if(!sp("que")){ e.preventDefault(); $("sp-err").hidden = false; $("sp-que").focus(); } });
+
+render(); drawCart(); spUpdate();
 </script>
 
 </body>

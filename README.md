@@ -39,6 +39,8 @@ Si queda vacío, los botones llevan a Instagram.
 - `img`: nombre de la foto dentro de `img/` (sin `.jpg`)
 - `p`: precio en pesos colombianos
 
+Etiqueta opcional: agrega `tag:"Más pedido"`, `tag:"Nuevo"` o `tag:"Últimas unidades"` al producto.
+
 Para perfumes con varios tamaños se usa `s` en lugar de `p`:
 
 ```js
