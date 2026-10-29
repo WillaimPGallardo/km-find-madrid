@@ -33,7 +33,7 @@ Si queda vacío, los botones llevan a Instagram.
 {c:"bolsos", b:"Michael Kors", n:"Bandolera Gigi", img:"bolso1", p:580000},
 ```
 
-- `c`: categoría (`bolsos`, `zapatillas` o `perfumes`)
+- `c`: categoría (`bolsos`, `zapatillas`, `perfumes` o `pandora`)
 - `b`: marca
 - `n`: nombre del modelo
 - `img`: nombre de la foto dentro de `img/` (sin `.jpg`)

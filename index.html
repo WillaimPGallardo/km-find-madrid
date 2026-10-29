@@ -89,7 +89,7 @@ section{padding-block:80px}
 .center p.sub{margin-inline:auto}
 
 /* Categorías */
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 .cat{position:relative;border-radius:4px;overflow:hidden;text-decoration:none;color:#fff;aspect-ratio:3/4;display:flex;align-items:flex-end;background:var(--blush)}
 .cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .cat:hover img{transform:scale(1.05)}
@@ -105,7 +105,7 @@ section{padding-block:80px}
 .cat.more li{font-size:11px;border:1px solid var(--gold);border-radius:999px;padding:4px 10px;color:var(--brown)}
 .cat.more .t{height:100%;display:flex;flex-direction:column;justify-content:flex-end}
 .cat.more .big{font-family:var(--display);font-size:64px;line-height:1;color:var(--gold);margin-bottom:auto}
-@media (max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1000px){.cats{grid-template-columns:repeat(2,1fr)}.cat.more{grid-column:1/-1;aspect-ratio:auto;min-height:220px}}
 @media (max-width:420px){.cat h3{font-size:22px}.cat .t{padding:14px}}
 
 /* Catálogo */
@@ -128,6 +128,7 @@ section{padding-block:80px}
 .item .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
 .item .br{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
 .item h3{font-size:19px;line-height:1.2}
+.sub2{font-size:12px;color:var(--muted)}
 .sizes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .size{font:500 11px var(--body);border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:4px 10px;cursor:pointer}
 .size[aria-pressed="true"]{border-color:var(--brown);color:var(--brown);background:var(--paper)}
@@ -257,7 +258,8 @@ footer{background:#2B1A10;color:#F4EAE2}
         <a class="cat" href="#catalogo" data-go="zapatillas"><img src="img/hero-nike.jpg" alt="" loading="lazy"><div class="t"><h3>Zapatillas</h3><p>Nike y Salomon · desde $300.000</p></div></a>
         <a class="cat" href="#catalogo" data-go="perfumes"><img src="img/hero-perfumes.jpg" alt="" loading="lazy"><div class="t"><h3>Perfumes</h3><p>Dior, YSL, Prada · desde $185.000</p></div></a>
         <a class="cat" href="#catalogo" data-go="bolsos"><img src="img/hero-bolsos.jpg" alt="" loading="lazy"><div class="t"><h3>Bolsos</h3><p>MK, Guess, Tous · desde $360.000</p></div></a>
-        <a class="cat more js-wa" href="#" data-msg="Hola, quiero cotizar un producto sobre pedido"><div class="t"><span class="big">+</span><h3>Sobre pedido</h3><p>Lo que veas en España, te lo conseguimos.</p><ul><li>Ropa</li><li>Makeup</li><li>Skincare</li><li>Pandora</li></ul></div></a>
+        <a class="cat" href="#catalogo" data-go="pandora" style="background:#F6F6F6"><img src="img/pandora2.jpg" alt="" loading="lazy" style="object-fit:contain"><div class="t"><h3>Pandora</h3><p>Pulseras y charms · desde $380.000</p></div></a>
+        <a class="cat more js-wa" href="#" data-msg="Hola, quiero cotizar un producto sobre pedido"><div class="t"><span class="big">+</span><h3>Sobre pedido</h3><p>Lo que veas en España, te lo conseguimos.</p><ul><li>Ropa</li><li>Makeup</li><li>Skincare</li><li>Accesorios</li></ul></div></a>
       </div>
     </div>
   </section>
@@ -366,8 +368,14 @@ const P = [
   {c:"zapatillas", b:"Salomon", n:"XT-Whisper Void", img:"salomon4", p:700000},
   {c:"zapatillas", b:"Salomon", n:"Ultra Glide 4", img:"salomon5", p:700000},
   {c:"zapatillas", b:"Salomon", n:"XT-6 Expanse", img:"salomon6", p:680000},
+  {c:"pandora", b:"Pandora", n:"Pulsera Moments cierre de corazón", img:"pandora1", s:[["Plata",380000]]},
+  {c:"pandora", b:"Pandora", n:"Pulsera Moments cadena de serpiente", img:"pandora2", s:[["Dorada",530000]]},
+  {c:"pandora", b:"Pandora", n:"Pulsera tejido de serpiente", img:"pandora3", s:[["Dorada, cierre corazón",660000,"pandora3"],["Rosa, cierre redondo",660000,"pandora4"]]},
+  {c:"pandora", b:"Pandora", n:"Charm Flor mágica de Rapunzel", sub:"Brilla en la oscuridad", img:"pandora5", p:510000},
+  {c:"pandora", b:"Pandora", n:"Charm Oso Lotso", img:"pandora6", p:430000},
+  {c:"pandora", b:"Pandora", n:"Charm Winnie Pooh", img:"pandora7", p:415000},
 ];
-const CATS = [["todo","Todo"],["bolsos","Bolsos"],["zapatillas","Zapatillas"],["perfumes","Perfumes"]];
+const CATS = [["todo","Todo"],["bolsos","Bolsos"],["zapatillas","Zapatillas"],["perfumes","Perfumes"],["pandora","Pandora"]];
 const fmt = n => "$" + n.toLocaleString("es-CO").replace(/,/g,".");
 const waLink = msg => WHATSAPP ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}` : IG;
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
@@ -384,7 +392,7 @@ function card(p, i){
     <div class="ph"><img src="img/${p.img}.jpg" alt="${esc(p.n)} de ${esc(p.b)}" loading="lazy"></div>
     <div class="bd">
       <span class="br">${esc(p.b)}</span>
-      <h3>${esc(p.n)}</h3>
+      <h3>${esc(p.n)}</h3>${p.sub?`<span class="sub2">${esc(p.sub)}</span>`:""}
       ${sizes && sizes.length>1 ? `<div class="sizes">${sizes.map((s,k)=>`<button class="size" data-k="${k}" aria-pressed="${k===0}">${s[0]}</button>`).join("")}</div>` : sizes ? `<div class="sizes"><span class="size" aria-pressed="true">${sizes[0][0]}</span></div>` : ""}
       <div class="ft"><span class="price">${fmt(price)}<small>COP</small></span>
       <a class="ask" target="_blank" rel="noopener" href="${esc(waLink(msg))}"><svg><use href="#i-wa"/></svg>Lo quiero</a></div>
@@ -404,6 +412,7 @@ grid.addEventListener("click", e => {
   const card = b.closest(".item"), p = P[+card.dataset.i], s = p.s[+b.dataset.k];
   card.querySelectorAll("button.size").forEach(x=>x.setAttribute("aria-pressed", x===b));
   card.querySelector(".price").innerHTML = `${fmt(s[1])}<small>COP</small>`;
+  if(s[2]) card.querySelector(".ph img").src = `img/${s[2]}.jpg`;
   card.querySelector(".ask").href = waLink(`Hola, me interesa: ${p.n} de ${p.b} (${s[0]}) - ${fmt(s[1])}`);
 });
 document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => setCat(a.dataset.go)));
