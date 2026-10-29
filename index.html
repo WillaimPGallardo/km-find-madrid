@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KM Find Madrid</title>
+<meta name="description" content="Compras personales en España con envío a Colombia. Bolsos, perfumes, zapatillas, makeup, skincare y Pandora 100% originales.">
+<meta property="og:title" content="KM Find Madrid">
+<meta property="og:description" content="Lo que buscas, lo encontramos en España. Productos 100% originales con envío a Colombia.">
+<meta property="og:image" content="img/logo.jpg">
+<link rel="icon" href="img/logo.jpg">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: boutique editorial — portada con arcos madrileños, cinta de marcas, categorías con foto, catálogo filtrable con tallas, pasos, garantías, preguntas, cierre */
+:root{
+  --bg:#FAF6F2; --paper:#F2E9E2; --blush:#EBD3C9; --ink:#2B1F18; --brown:#5C3317; --gold:#B38B5D; --muted:#7D685A; --line:#E4D6CC; --card:#FFFFFF; --mat:#F5F1ED;
+  --display:"Gilda Display","Cormorant Garamond",Georgia,serif;
+  --body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1A1411; --paper:#241B16; --blush:#4B3329; --ink:#F4EAE2; --brown:#EBC9AA; --gold:#D2AC7B; --muted:#B9A595; --line:#3A2C25; --card:#211915; --mat:#EFE9E4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1411; --paper:#241B16; --blush:#4B3329; --ink:#F4EAE2; --brown:#EBC9AA; --gold:#D2AC7B; --muted:#B9A595; --line:#3A2C25; --card:#211915; --mat:#EFE9E4; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--brown);text-wrap:balance;margin:0;line-height:1.1}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0}
+.star{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:14px 24px;font:600 13px/1 var(--body);letter-spacing:.06em;text-decoration:none;border:1px solid var(--brown);cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-solid{background:var(--brown);color:var(--bg)}
+.btn-ghost{background:transparent;color:var(--brown)}
+.btn-ghost:hover{background:var(--paper)}
+.btn svg{width:17px;height:17px;flex:none}
+
+/* Header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.brand img{width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);object-fit:cover;flex:none}
+.brand b{font-family:var(--display);font-weight:400;font-size:21px;color:var(--brown);letter-spacing:.05em;display:block;line-height:1.1;white-space:nowrap}
+.brand small{font-size:10px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase}
+nav{display:flex;gap:26px;font-size:13px;font-weight:500}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--brown)}
+.bar .btn{padding:11px 18px}
+@media (max-width:900px){nav{display:none}}
+@media (max-width:480px){.bar .btn span{display:none}.bar .btn{padding:11px}.brand small{display:none}}
+
+/* Hero */
+.hero{padding-block:56px 72px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(42px,6.4vw,80px);letter-spacing:-.01em;margin-top:18px}
+.hero h1 em{color:var(--gold)}
+.hero .lead{color:var(--muted);max-width:42ch;margin:22px 0 30px;font-size:16px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.route{display:flex;align-items:center;gap:12px;margin-top:36px;font-size:11px;letter-spacing:.24em;color:var(--muted);text-transform:uppercase}
+.route i{flex:0 1 70px;border-top:1px dashed var(--gold)}
+.route svg{width:18px;height:18px;color:var(--gold);flex:none}
+.arches{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:end;position:relative}
+.arch{border-radius:999px 999px 6px 6px;overflow:hidden;border:1px solid var(--gold);padding:6px;background:var(--bg)}
+.arch img{border-radius:999px 999px 3px 3px;width:100%;aspect-ratio:3/5;object-fit:cover}
+.arch:nth-child(2){transform:translateY(-36px)}
+.seal{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);width:108px;height:108px;border-radius:50%;background:var(--brown);color:var(--bg);display:grid;place-items:center;text-align:center;font:600 10px/1.35 var(--body);letter-spacing:.16em;text-transform:uppercase;box-shadow:0 8px 24px rgb(0 0 0 / .18)}
+.seal b{display:block;font:400 30px/1 var(--display);letter-spacing:0}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:64px;padding-top:36px}.arches{max-width:520px;margin:0 auto;width:100%}}
+
+/* Marcas */
+.brands{border-block:1px solid var(--line);overflow:hidden;padding-block:18px;background:var(--paper)}
+.track{display:flex;gap:44px;width:max-content;animation:slide 40s linear infinite}
+.track span{font-family:var(--display);font-size:22px;color:var(--brown);white-space:nowrap;display:flex;align-items:center;gap:44px}
+.track span::after{content:"✦";font-size:11px;color:var(--gold)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding-block:80px}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;flex-wrap:wrap;margin-bottom:36px}
+.head h2{font-size:clamp(34px,4.6vw,54px);margin-top:10px}
+.head p.sub{color:var(--muted);max-width:44ch;margin:12px 0 0}
+.center{text-align:center;justify-content:center}
+.center p.sub{margin-inline:auto}
+
+/* Categorías */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat{position:relative;border-radius:4px;overflow:hidden;text-decoration:none;color:#fff;aspect-ratio:3/4;display:flex;align-items:flex-end;background:var(--blush)}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.cat:hover img{transform:scale(1.05)}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgb(30 18 10 / .78),rgb(30 18 10 / 0) 55%)}
+.cat .t{position:relative;z-index:1;padding:20px;width:100%}
+.cat h3{color:#fff;font-size:28px}
+.cat p{margin:4px 0 0;font-size:12px;letter-spacing:.08em;color:rgb(255 255 255 / .88)}
+.cat.more{color:var(--brown);background:var(--paper);border:1px solid var(--line)}
+.cat.more::after{display:none}
+.cat.more h3{color:var(--brown)}
+.cat.more p{color:var(--muted)}
+.cat.more ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.cat.more li{font-size:11px;border:1px solid var(--gold);border-radius:999px;padding:4px 10px;color:var(--brown)}
+.cat.more .t{height:100%;display:flex;flex-direction:column;justify-content:flex-end}
+.cat.more .big{font-family:var(--display);font-size:64px;line-height:1;color:var(--gold);margin-bottom:auto}
+@media (max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.cat h3{font-size:22px}.cat .t{padding:14px}}
+
+/* Catálogo */
+.catalog{background:var(--paper)}
+.controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:28px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:500 13px var(--body);padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--brown);color:var(--bg);border-color:var(--brown)}
+.tab .c{opacity:.6;margin-left:4px;font-variant-numeric:tabular-nums}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 16px;min-width:0;flex:0 1 280px}
+.search svg{width:16px;height:16px;color:var(--muted);flex:none}
+.search input{border:0;background:transparent;font:14px var(--body);color:var(--ink);padding:10px 0;width:100%;min-width:0;outline:none}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+.item{background:var(--card);border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.item .ph{background:var(--mat);aspect-ratio:1;display:grid;place-items:center;overflow:hidden}
+.item .ph img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transition:transform .4s}
+.item:hover .ph img{transform:scale(1.04)}
+.item .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.item .br{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.item h3{font-size:19px;line-height:1.2}
+.sizes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.size{font:500 11px var(--body);border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:4px 10px;cursor:pointer}
+.size[aria-pressed="true"]{border-color:var(--brown);color:var(--brown);background:var(--paper)}
+.item .ft{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.price{font-weight:600;font-size:16px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.price small{font-weight:400;color:var(--muted);font-size:10px;margin-left:3px;letter-spacing:.08em}
+.ask{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--body);color:var(--bg);background:var(--brown);text-decoration:none;border-radius:999px;padding:8px 14px;white-space:nowrap}
+.ask svg{width:14px;height:14px}
+@media (max-width:420px){.item .bd{padding:12px}.item h3{font-size:16px}.ask{width:100%;justify-content:center}}
+.empty{grid-column:1/-1;text-align:center;padding:48px 16px;border:1px dashed var(--gold);border-radius:4px;background:var(--card)}
+.empty h3{font-size:26px;margin-bottom:8px}
+.empty p{color:var(--muted);margin:0 0 18px}
+.note{margin:28px 0 0;font-size:13px;color:var(--muted)}
+
+/* Pasos */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:32px 28px;position:relative}
+.step .num{font-family:var(--display);font-size:72px;line-height:.9;color:var(--blush)}
+:root[data-theme="dark"] .step .num{color:var(--gold)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .step .num{color:var(--gold)}}
+.step h3{font-size:26px;margin:18px 0 10px}
+.step p{color:var(--muted);margin:0}
+.step .pill{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brown);background:var(--paper);border-radius:999px;padding:5px 12px;font-weight:600}
+.step:not(:last-child)::after{content:"→";position:absolute;right:-17px;top:44px;width:28px;height:28px;border-radius:50%;background:var(--brown);color:var(--bg);display:grid;place-items:center;font-size:13px;z-index:1}
+@media (max-width:820px){.steps{grid-template-columns:1fr}.step:not(:last-child)::after{content:"↓";right:auto;left:28px;top:auto;bottom:-17px}}
+
+/* Garantías */
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-block:1px solid var(--line)}
+.promise div{padding:28px 22px;border-left:1px solid var(--line)}
+.promise div:first-child{border-left:0}
+.promise b{font-family:var(--display);font-weight:400;font-size:34px;color:var(--brown);display:block;line-height:1.1}
+.promise span{font-size:13px;color:var(--muted)}
+@media (max-width:820px){.promise{grid-template-columns:repeat(2,1fr)}.promise div:nth-child(3){border-left:0}.promise div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* Preguntas */
+.faq{max-width:780px;margin:0 auto;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;font-family:var(--display);font-size:21px;color:var(--brown)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--body);font-size:22px;color:var(--gold);transition:transform .2s;flex:none}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 22px;color:var(--muted);max-width:62ch}
+
+/* Cierre */
+.closing{background:var(--blush);padding-block:80px}
+.closing .in{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.closing img{width:220px;height:220px;border-radius:50%;border:1px solid var(--gold);object-fit:cover}
+.closing h2{font-size:clamp(32px,4.4vw,52px)}
+.closing p{color:var(--ink);opacity:.8;margin:14px 0 26px;max-width:44ch}
+@media (max-width:720px){.closing .in{grid-template-columns:1fr;text-align:center;justify-items:center;gap:28px}.closing img{width:160px;height:160px}.closing .actions{justify-content:center}}
+
+/* Footer */
+footer{background:#2B1A10;color:#F4EAE2}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding-block:52px 32px}
+.foot h4{font-family:var(--display);font-weight:400;font-size:26px;margin:0 0 8px;color:#EBC9AA}
+.foot p,.foot a{font-size:13px;color:rgb(244 234 226 / .8);margin:0 0 7px;display:block;text-decoration:none}
+.foot a:hover{color:#fff;text-decoration:underline}
+.foot .lbl{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#D2AC7B;margin-bottom:12px}
+.copy{border-top:1px solid rgb(244 234 226 / .14);padding-block:18px;font-size:12px;color:rgb(244 234 226 / .6);text-align:center}
+@media (max-width:760px){.foot{grid-template-columns:1fr}}
+
+/* WhatsApp flotante */
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:25;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgb(0 0 0 / .22)}
+.fab svg{width:30px;height:30px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.8 2c0 1.2.9 2.3 1 2.5s1.7 2.6 4.1 3.6c1.5.7 2.1.7 2.9.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.5-.3z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+</defs></svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#inicio" aria-label="KM Find Madrid, inicio">
+      <img src="img/logo.jpg" alt="">
+      <span><b>KM Find Madrid</b><small>Madrid ✈ Colombia</small></span>
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#categorias">Categorías</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-solid js-wa" href="#" data-msg="Hola KM Find Madrid, quiero hacer un pedido"><svg><use href="#i-wa"/></svg><span>Pedir por WhatsApp</span></a>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow"><span class="star">✦</span> Tu shopping en España, sin límites</p>
+      <h1>Lo que buscas, <em>lo encontramos</em> en España</h1>
+      <p class="lead">Bolsos, perfumes, zapatillas, makeup, skincare y Pandora. Productos 100% originales comprados en tiendas de España y enviados a Colombia.</p>
+      <div class="actions">
+        <a class="btn btn-solid js-wa" href="#" data-msg="Hola, estoy buscando un producto en España"><svg><use href="#i-wa"/></svg>Escríbenos por WhatsApp</a>
+        <a class="btn btn-ghost" href="#catalogo">Ver catálogo</a>
+      </div>
+      <div class="route"><span>Madrid</span><i></i><svg style="transform:rotate(90deg)"><use href="#i-plane"/></svg><i></i><span>Colombia</span></div>
+    </div>
+    <div class="arches">
+      <div class="arch"><img src="img/hero-bolsos.jpg" alt="Bolsos de marcas como Michael Kors, Coach, Tous y Guess"></div>
+      <div class="arch"><img src="img/hero-perfumes.jpg" alt="Perfumes originales de Chanel, Dior, Yves Saint Laurent y más"></div>
+      <div class="arch"><img src="img/hero-salomon.jpg" alt="Zapatillas Salomon"></div>
+      <div class="seal"><span><b>100%</b>originales</span></div>
+    </div>
+  </div>
+
+  <div class="brands" aria-label="Marcas que conseguimos">
+    <div class="track">
+      <span>Michael Kors</span><span>Tous</span><span>Guess</span><span>Salomon</span><span>Nike</span><span>Dior</span><span>Yves Saint Laurent</span><span>Prada</span><span>Armani</span><span>Dolce &amp; Gabbana</span><span>Lattafa</span><span>Pandora</span>
+      <span aria-hidden="true">Michael Kors</span><span aria-hidden="true">Tous</span><span aria-hidden="true">Guess</span><span aria-hidden="true">Salomon</span><span aria-hidden="true">Nike</span><span aria-hidden="true">Dior</span><span aria-hidden="true">Yves Saint Laurent</span><span aria-hidden="true">Prada</span><span aria-hidden="true">Armani</span><span aria-hidden="true">Dolce &amp; Gabbana</span><span aria-hidden="true">Lattafa</span><span aria-hidden="true">Pandora</span>
+    </div>
+  </div>
+
+  <section id="categorias">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="eyebrow">Productos destacados</p><h2>Lo que más nos piden</h2></div>
+        <a class="btn btn-ghost" href="#catalogo">Ver todo →</a>
+      </div>
+      <div class="cats">
+        <a class="cat" href="#catalogo" data-go="zapatillas"><img src="img/hero-nike.jpg" alt="" loading="lazy"><div class="t"><h3>Zapatillas</h3><p>Nike y Salomon · desde $300.000</p></div></a>
+        <a class="cat" href="#catalogo" data-go="perfumes"><img src="img/hero-perfumes.jpg" alt="" loading="lazy"><div class="t"><h3>Perfumes</h3><p>Dior, YSL, Prada · desde $185.000</p></div></a>
+        <a class="cat" href="#catalogo" data-go="bolsos"><img src="img/hero-bolsos.jpg" alt="" loading="lazy"><div class="t"><h3>Bolsos</h3><p>MK, Guess, Tous · desde $360.000</p></div></a>
+        <a class="cat more js-wa" href="#" data-msg="Hola, quiero cotizar un producto sobre pedido"><div class="t"><span class="big">+</span><h3>Sobre pedido</h3><p>Lo que veas en España, te lo conseguimos.</p><ul><li>Ropa</li><li>Makeup</li><li>Skincare</li><li>Pandora</li></ul></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" id="catalogo">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="eyebrow">Catálogo</p><h2>Modelos y precios</h2><p class="sub">Precios en pesos colombianos. Toca "Lo quiero" y nos llega tu pedido por WhatsApp con el producto ya escrito.</p></div>
+      </div>
+      <div class="controls">
+        <div class="tabs" role="group" aria-label="Filtrar por categoría" id="tabs"></div>
+        <label class="search"><svg><use href="#i-search"/></svg><input id="q" type="search" placeholder="Buscar marca o modelo" aria-label="Buscar marca o modelo"></label>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note">¿No ves lo que buscas? Mándanos el nombre o una foto del producto y te damos precio y disponibilidad.</p>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="wrap">
+      <div class="head center"><div><p class="eyebrow">Paso a paso</p><h2>¿Cómo funciona?</h2><p class="sub">Comprar en España desde Colombia en tres pasos.</p></div></div>
+      <div class="steps">
+        <div class="step"><span class="num">01</span><h3>Elige el producto</h3><p>Cuéntanos qué buscas, del catálogo o de cualquier tienda en España, y te ayudamos a encontrarlo.</p><span class="pill">Por WhatsApp o DM</span></div>
+        <div class="step"><span class="num">02</span><h3>Confirma con el 50%</h3><p>Cuando lo encontramos, pagas la mitad del valor y hacemos la compra.</p><span class="pill">Mitad del pago</span></div>
+        <div class="step"><span class="num">03</span><h3>Recibe en Colombia</h3><p>Coordinamos el envío y te avisamos en cada paso hasta que lo tengas.</p><span class="pill">Envíos cada 15 a 20 días</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="promise">
+      <div><b>100%</b><span>Productos originales</span></div>
+      <div><b>España</b><span>Comprados en tiendas oficiales de España</span></div>
+      <div><b>A diario</b><span>Recibimos pedidos todos los días</span></div>
+      <div><b>15–20 días</b><span>Frecuencia de envíos a Colombia</span></div>
+    </div>
+  </div>
+
+  <section id="preguntas">
+    <div class="wrap">
+      <div class="head center"><div><p class="eyebrow">Preguntas frecuentes</p><h2>Antes de pedir</h2></div></div>
+      <div class="faq">
+        <details open><summary>¿Los productos son originales?</summary><p>Sí. Todo lo compramos directamente en tiendas de España, así que cada producto es 100% original.</p></details>
+        <details><summary>¿Puedo pedir algo que no está en el catálogo?</summary><p>Claro. Trabajamos sobre pedido: envíanos el nombre, el enlace o una foto del producto y te decimos si está disponible y cuánto cuesta.</p></details>
+        <details><summary>¿Cómo se paga?</summary><p>Para confirmar el pedido pagas el 50% del valor. Con eso hacemos la compra y coordinamos el resto contigo por WhatsApp.</p></details>
+        <details><summary>¿Cuánto tarda en llegar?</summary><p>Recibimos pedidos todos los días y hacemos envíos a Colombia cada 15 a 20 días. Te avisamos cuando tu pedido salga y cuando llegue.</p></details>
+        <details><summary>¿Los precios están en euros o en pesos?</summary><p>Los precios del catálogo están en pesos colombianos. Para productos sobre pedido te damos el valor en pesos al cotizar.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="closing">
+    <div class="wrap in">
+      <img src="img/logo.jpg" alt="Logo de KM Find Madrid" loading="lazy">
+      <div>
+        <p class="eyebrow">KM Find Madrid</p>
+        <h2>Lo que te gusta de España, ahora más cerca de ti</h2>
+        <p>¿Te gustó algo? Escríbenos y te ayudamos a conseguirlo.</p>
+        <div class="actions">
+          <a class="btn btn-solid js-wa" href="#" data-msg="Hola, me gustaría cotizar un producto"><svg><use href="#i-wa"/></svg>Escríbenos por WhatsApp</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/kmfind_madrid/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@kmfind_madrid</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><h4>KM Find Madrid</h4><p>Lo mejor de España, para ti. Moda, belleza y lifestyle sobre pedido.</p></div>
+    <div><p class="lbl">Contacto</p><a class="js-wa" href="#" data-msg="Hola KM Find Madrid">Escríbenos por WhatsApp</a><a href="https://www.instagram.com/kmfind_madrid/" target="_blank" rel="noopener">Síguenos en Instagram</a></div>
+    <div><p class="lbl">Envíos</p><p>Pedidos a diario</p><p>Envíos cada 15 a 20 días</p><p>Envíos a Colombia</p></div>
+  </div>
+  <div class="wrap copy">© 2026 KM Find Madrid · Todos los derechos reservados</div>
+</footer>
+
+<a class="fab js-wa" href="#" data-msg="Hola KM Find Madrid" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
+
+<script>
+// Número de WhatsApp con indicativo, sin espacios ni "+" (ej: 34600000000). Si está vacío, los botones llevan a Instagram.
+const WHATSAPP = "";
+const IG = "https://www.instagram.com/kmfind_madrid/";
+
+const P = [
+  {c:"bolsos", b:"Michael Kors", n:"Bandolera Gigi", img:"bolso1", p:580000},
+  {c:"bolsos", b:"Michael Kors", n:"Pochette Jet Set", img:"bolso2", p:400000},
+  {c:"bolsos", b:"Guess", n:"Bolso Hobo Evie", img:"bolso3", p:490000},
+  {c:"bolsos", b:"Guess", n:"Bolso Isabel", img:"bolso4", p:420000},
+  {c:"bolsos", b:"Tous", n:"Clutch Kaos Icon", img:"bolso5", p:360000},
+  {c:"bolsos", b:"Tous", n:"Mini Cube", img:"bolso6", p:400000},
+  {c:"perfumes", b:"Dolce & Gabbana", n:"L'Impératrice", img:"perfume1", s:[["100 ml",275000]]},
+  {c:"perfumes", b:"Lattafa", n:"Candy Eau de Parfum", img:"perfume2", s:[["100 ml",185000]]},
+  {c:"perfumes", b:"Armani", n:"My Way", img:"perfume3", s:[["90 ml",570000]]},
+  {c:"perfumes", b:"Yves Saint Laurent", n:"Black Opium", img:"perfume4", s:[["50 ml",320000],["90 ml",375000]]},
+  {c:"perfumes", b:"Prada", n:"Paradoxe", img:"perfume5", s:[["30 ml",315000],["50 ml",430000],["90 ml",585000]]},
+  {c:"perfumes", b:"Dior", n:"Miss Dior Parfum", img:"perfume6", s:[["35 ml",350000],["50 ml",490000],["80 ml",665000]]},
+  {c:"zapatillas", b:"Nike", n:"Winflo 12", img:"nike1", p:390000},
+  {c:"zapatillas", b:"Nike", n:"Air Force 1 '07", img:"nike2", p:470000},
+  {c:"zapatillas", b:"Nike", n:"Juniper Trail 3", img:"nike3", p:340000},
+  {c:"zapatillas", b:"Nike", n:"MC Trainer 4", img:"nike4", p:300000},
+  {c:"zapatillas", b:"Nike", n:"Tennis Classic", img:"nike5", p:390000},
+  {c:"zapatillas", b:"Nike", n:"Free Metcon 7", img:"nike6", p:490000},
+  {c:"zapatillas", b:"Salomon", n:"Aero Glide 4", img:"salomon1", p:700000},
+  {c:"zapatillas", b:"Salomon", n:"Aero Glide 4 GRVL", img:"salomon2", p:720000},
+  {c:"zapatillas", b:"Salomon", n:"Aero Blaze 4", img:"salomon3", p:645000},
+  {c:"zapatillas", b:"Salomon", n:"XT-Whisper Void", img:"salomon4", p:700000},
+  {c:"zapatillas", b:"Salomon", n:"Ultra Glide 4", img:"salomon5", p:700000},
+  {c:"zapatillas", b:"Salomon", n:"XT-6 Expanse", img:"salomon6", p:680000},
+];
+const CATS = [["todo","Todo"],["bolsos","Bolsos"],["zapatillas","Zapatillas"],["perfumes","Perfumes"]];
+const fmt = n => "$" + n.toLocaleString("es-CO").replace(/,/g,".");
+const waLink = msg => WHATSAPP ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}` : IG;
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+
+let cat = "todo", q = "";
+const tabs = document.getElementById("tabs"), grid = document.getElementById("grid"), qi = document.getElementById("q");
+tabs.innerHTML = CATS.map(([k,l]) => `<button class="tab" id="f-${k}" data-f="${k}" aria-pressed="${k===cat}">${l}<span class="c">${k==="todo"?P.length:P.filter(p=>p.c===k).length}</span></button>`).join("");
+
+function card(p, i){
+  const sizes = p.s || null, price = sizes ? sizes[0][1] : p.p, size = sizes ? sizes[0][0] : "";
+  const msg = `Hola, me interesa: ${p.n} de ${p.b}${size?" ("+size+")":""} - ${fmt(price)}`;
+  return `<article class="item" data-i="${i}">
+    <div class="ph"><img src="img/${p.img}.jpg" alt="${esc(p.n)} de ${esc(p.b)}" loading="lazy"></div>
+    <div class="bd">
+      <span class="br">${esc(p.b)}</span>
+      <h3>${esc(p.n)}</h3>
+      ${sizes && sizes.length>1 ? `<div class="sizes">${sizes.map((s,k)=>`<button class="size" data-k="${k}" aria-pressed="${k===0}">${s[0]}</button>`).join("")}</div>` : sizes ? `<div class="sizes"><span class="size" aria-pressed="true">${sizes[0][0]}</span></div>` : ""}
+      <div class="ft"><span class="price">${fmt(price)}<small>COP</small></span>
+      <a class="ask" target="_blank" rel="noopener" href="${esc(waLink(msg))}"><svg><use href="#i-wa"/></svg>Lo quiero</a></div>
+    </div></article>`;
+}
+function render(){
+  const t = norm(q.trim());
+  const list = P.map((p,i)=>[p,i]).filter(([p]) => (cat==="todo"||p.c===cat) && (!t || norm(p.b+" "+p.n).includes(t)));
+  grid.innerHTML = list.length ? list.map(([p,i])=>card(p,i)).join("") :
+    `<div class="empty"><h3>Lo buscamos por ti</h3><p>No tenemos "${esc(q)}" en el catálogo, pero lo podemos conseguir en España.</p><a class="btn btn-solid" target="_blank" rel="noopener" href="${esc(waLink("Hola, estoy buscando: "+q))}"><svg><use href="#i-wa"/></svg>Pedir cotización</a></div>`;
+}
+function setCat(k){ cat=k; tabs.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===k)); render(); }
+tabs.addEventListener("click", e => { const b=e.target.closest(".tab"); if(b) setCat(b.dataset.f); });
+qi.addEventListener("input", () => { q = qi.value; render(); });
+grid.addEventListener("click", e => {
+  const b = e.target.closest("button.size"); if(!b) return;
+  const card = b.closest(".item"), p = P[+card.dataset.i], s = p.s[+b.dataset.k];
+  card.querySelectorAll("button.size").forEach(x=>x.setAttribute("aria-pressed", x===b));
+  card.querySelector(".price").innerHTML = `${fmt(s[1])}<small>COP</small>`;
+  card.querySelector(".ask").href = waLink(`Hola, me interesa: ${p.n} de ${p.b} (${s[0]}) - ${fmt(s[1])}`);
+});
+document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => setCat(a.dataset.go)));
+document.querySelectorAll(".js-wa").forEach(a => { a.href = waLink(a.dataset.msg); a.target = "_blank"; a.rel = "noopener"; });
+render();
+</script>
+
+</body>
+</html>
