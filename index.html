@@ -527,9 +527,12 @@ body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 <script>
 // Número de WhatsApp con indicativo, sin espacios ni "+" (ej: 34600000000). Si está vacío, los botones llevan a Instagram.
 const WHATSAPP = "573024449435";
+// Enlace de la hoja de Google publicada como CSV (Archivo → Compartir → Publicar en la web).
+// Si está vacío o no carga, la página usa la lista de productos de abajo.
+const HOJA = "";
 const IG = "https://www.instagram.com/kmfind_madrid/";
 
-const P = [
+let P = [
   {c:"bolsos", b:"Michael Kors", n:"Bandolera Gigi", img:"bolso1", tag:"Más pedido", p:580000},
   {c:"bolsos", b:"Michael Kors", n:"Pochette Jet Set", img:"bolso2", p:400000},
   {c:"bolsos", b:"Guess", n:"Bolso Hobo Evie", img:"bolso3", p:490000},
@@ -562,23 +565,47 @@ const P = [
   {c:"pandora", b:"Pandora", n:"Charm Winnie Pooh", img:"pandora7", p:415000},
 ];
 // Etiquetas disponibles: "Más pedido", "Nuevo", "Últimas unidades" (campo tag de cada producto).
-const CATS = [["todo","Todo"],["bolsos","Bolsos"],["zapatillas","Zapatillas"],["perfumes","Perfumes"],["pandora","Pandora"]];
 const fmt = n => "$" + Math.round(n).toLocaleString("es-CO").replace(/,/g,".");
 const waLink = msg => WHATSAPP ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}` : IG;
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const tagClass = t => ({"Nuevo":"nuevo","Últimas unidades":"ultimas"})[t] || "";
+const pid = p => p.b + "|" + p.n;
+const slug = t => norm(String(t).trim()).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+function imgSrc(x){
+  x = String(x||"").trim();
+  if(!x) return "img/logo.jpg";
+  if(/^https?:\/\//i.test(x)){
+    const m = x.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{10,})/);
+    return m ? `https://lh3.googleusercontent.com/d/${m[1]}=w800` : x;
+  }
+  return "img/" + x.replace(/\.(jpe?g|png|webp)$/i,"") + ".jpg";
+}
 const variant = (p,k) => p.s ? {label:p.s[k][0], price:p.s[k][1], img:p.s[k][2]||p.img} : {label:"", price:p.p, img:p.img};
 
 /* ---------- Catálogo ---------- */
 let cat = "todo", q = "";
 const tabs = document.getElementById("tabs"), grid = document.getElementById("grid"), qi = document.getElementById("q");
-tabs.innerHTML = CATS.map(([k,l]) => `<button class="tab" id="f-${k}" data-f="${k}" aria-pressed="${k===cat}">${l}<span class="c">${k==="todo"?P.length:P.filter(p=>p.c===k).length}</span></button>`).join("");
+const LABELS = {todo:"Todo"};
+function buildTabs(){
+  const keys = [...new Set(P.map(p=>p.c))];
+  if(cat!=="todo" && !keys.includes(cat)) cat = "todo";
+  tabs.innerHTML = ["todo",...keys].map(k => `<button class="tab" id="f-${k}" data-f="${k}" aria-pressed="${k===cat}">${esc(LABELS[k]||k)}<span class="c">${k==="todo"?P.length:P.filter(p=>p.c===k).length}</span></button>`).join("");
+  document.querySelectorAll(".cat[data-go]").forEach(a => {
+    const list = P.filter(p=>p.c===a.dataset.go), el = a.querySelector("p");
+    if(!list.length){ a.hidden = true; return; }
+    a.hidden = false;
+    const min = Math.min(...list.map(p => p.s ? Math.min(...p.s.map(x=>x[1])) : p.p));
+    el.textContent = el.textContent.replace(/desde \$[\d.]+/, "desde " + fmt(min));
+  });
+}
+[["bolsos","Bolsos"],["zapatillas","Zapatillas"],["perfumes","Perfumes"],["pandora","Pandora"]].forEach(([k,l])=>LABELS[k]=l);
+buildTabs();
 
 function card(p, i){
   const v = variant(p,0), sizes = p.s;
   return `<article class="item" data-i="${i}" data-k="0">
-    <div class="ph">${p.tag?`<span class="badge ${tagClass(p.tag)}">${esc(p.tag)}</span>`:""}<img src="img/${v.img}.jpg" alt="${esc(p.n)} de ${esc(p.b)}" loading="lazy"></div>
+    <div class="ph">${p.tag?`<span class="badge ${tagClass(p.tag)}">${esc(p.tag)}</span>`:""}<img src="${esc(imgSrc(v.img))}" alt="${esc(p.n)} de ${esc(p.b)}" loading="lazy" onerror="this.onerror=null;this.src='img/logo.jpg'"></div>
     <div class="bd">
       <span class="br">${esc(p.b)}</span>
       <h3>${esc(p.n)}</h3>${p.sub?`<span class="sub2">${esc(p.sub)}</span>`:""}
@@ -604,7 +631,7 @@ grid.addEventListener("click", e => {
     c.dataset.k = k;
     c.querySelectorAll("button.size").forEach(x=>x.setAttribute("aria-pressed", x===el));
     c.querySelector(".price").innerHTML = `${fmt(v.price)}<small>COP</small>`;
-    c.querySelector(".ph img").src = `img/${v.img}.jpg`;
+    c.querySelector(".ph img").src = imgSrc(v.img);
   } else {
     addToCart(i, +c.dataset.k);
     el.classList.add("added"); el.innerHTML = `<svg><use href="#i-cart"/></svg>Agregado`;
@@ -616,30 +643,33 @@ document.querySelectorAll(".js-wa").forEach(a => { a.href = waLink(a.dataset.msg
 
 /* ---------- Carrito ---------- */
 let cart = [];
-try { cart = JSON.parse(localStorage.getItem("kmcart") || "[]").filter(x => P[x.i] && (!P[x.i].s || P[x.i].s[x.k])); } catch(e) { cart = []; }
-const save = () => { try { localStorage.setItem("kmcart", JSON.stringify(cart)); } catch(e) {} };
+try { cart = JSON.parse(localStorage.getItem("kmcart2") || "[]"); } catch(e) { cart = []; }
+const byId = id => P.find(p => pid(p) === id);
+const cleanCart = () => { cart = cart.filter(x => { const p = byId(x.id); return p && (!p.s || p.s[x.k]); }); };
+cleanCart();
+const save = () => { try { localStorage.setItem("kmcart2", JSON.stringify(cart)); } catch(e) {} };
 const $ = id => document.getElementById(id);
 const drawer = $("drawer"), scrim = $("scrim"), toast = $("toast");
 let toastT;
 function showToast(t){ toast.textContent = t; toast.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(()=>toast.classList.remove("on"), 2200); }
 function addToCart(i,k){
-  const f = cart.find(x=>x.i===i && x.k===k);
-  f ? f.q++ : cart.push({i,k,q:1});
+  const id = pid(P[i]), f = cart.find(x=>x.id===id && x.k===k);
+  f ? f.q++ : cart.push({id,k,q:1});
   save(); drawCart();
   const p = P[i], v = variant(p,k);
   showToast(`Agregado: ${p.n}${v.label?" ("+v.label+")":""}`);
 }
 function cartMsg(){
-  const lines = cart.map(x => { const p=P[x.i], v=variant(p,x.k); return `• ${x.q} x ${p.n} - ${p.b}${v.label?" ("+v.label+")":""}: ${fmt(v.price*x.q)}`; });
-  const total = cart.reduce((a,x)=>a+variant(P[x.i],x.k).price*x.q,0);
+  const lines = cart.map(x => { const p=byId(x.id), v=variant(p,x.k); return `• ${x.q} x ${p.n} - ${p.b}${v.label?" ("+v.label+")":""}: ${fmt(v.price*x.q)}`; });
+  const total = cart.reduce((a,x)=>a+variant(byId(x.id),x.k).price*x.q,0);
   return `Hola KM Find Madrid, quiero hacer este pedido:\n\n${lines.join("\n")}\n\nTotal: ${fmt(total)} COP\n¿Me confirmas disponibilidad?`;
 }
 function drawCart(){
-  const n = cart.reduce((a,x)=>a+x.q,0), total = cart.reduce((a,x)=>a+variant(P[x.i],x.k).price*x.q,0);
+  const n = cart.reduce((a,x)=>a+x.q,0), total = cart.reduce((a,x)=>a+variant(byId(x.id),x.k).price*x.q,0);
   $("cartCount").hidden = !n; $("cartCount").textContent = n;
   $("cartFoot").hidden = !n;
-  $("lines").innerHTML = n ? cart.map((x,j)=>{ const p=P[x.i], v=variant(p,x.k); return `<div class="line">
-      <img src="img/${v.img}.jpg" alt="">
+  $("lines").innerHTML = n ? cart.map((x,j)=>{ const p=byId(x.id), v=variant(p,x.k); return `<div class="line">
+      <img src="${esc(imgSrc(v.img))}" alt="" onerror="this.onerror=null;this.src='img/logo.jpg'">
       <div><b>${esc(p.n)}</b><small>${esc(p.b)}${v.label?" · "+esc(v.label):""}</small>
         <div class="qty"><button data-j="${j}" data-d="-1" aria-label="Quitar uno">−</button><span>${x.q}</span><button data-j="${j}" data-d="1" aria-label="Agregar uno">+</button></div></div>
       <div style="text-align:right"><span class="pr">${fmt(v.price*x.q)}</span><br><button class="rm" data-rm="${j}">Quitar</button></div>
@@ -675,6 +705,50 @@ $("special").addEventListener("submit", e => e.preventDefault());
 $("sp-send").addEventListener("click", e => { if(!sp("que")){ e.preventDefault(); $("sp-err").hidden = false; $("sp-que").focus(); } });
 
 render(); drawCart(); spUpdate();
+
+/* ---------- Catálogo desde la hoja de Google ---------- */
+function parseCSV(t){
+  const rows = []; let row = [], f = "", q = false;
+  for(let i=0;i<t.length;i++){
+    const c = t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){ f+='"'; i++; } else q = false; } else f += c; }
+    else if(c==='"') q = true;
+    else if(c===','){ row.push(f); f=""; }
+    else if(c==='\n'){ row.push(f); rows.push(row); row=[]; f=""; }
+    else if(c!=='\r') f += c;
+  }
+  if(f || row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+const num = v => +String(v).replace(/[^\d]/g,"") || 0;
+function fromSheet(text){
+  const rows = parseCSV(text).filter(r => r.some(x => x.trim()));
+  if(rows.length < 2) return [];
+  const H = rows[0].map(h => slug(h));
+  const col = (r, name) => { const i = H.indexOf(name); return i < 0 ? "" : (r[i]||"").trim(); };
+  const out = [];
+  for(const r of rows.slice(1)){
+    const nombre = col(r,"nombre"), catTxt = col(r,"categoria");
+    if(!nombre || !catTxt) continue;
+    if(/^no$/i.test(col(r,"mostrar"))) continue;
+    const c = slug(catTxt);
+    if(!LABELS[c]) LABELS[c] = catTxt.charAt(0).toUpperCase() + catTxt.slice(1);
+    const p = {c, b: col(r,"marca"), n: nombre, img: col(r,"foto")};
+    const sub = col(r,"detalle"); if(sub) p.sub = sub;
+    const tag = col(r,"etiqueta"); if(tag) p.tag = tag;
+    const ops = col(r,"opciones").split(/[;\n]/).map(o => o.split("=").map(x=>x.trim())).filter(o => o[0] && num(o[1]));
+    if(ops.length) p.s = ops.map(o => o[2] ? [o[0], num(o[1]), o[2]] : [o[0], num(o[1])]);
+    else { p.p = num(col(r,"precio")); if(!p.p) continue; }
+    out.push(p);
+  }
+  return out;
+}
+if(HOJA){
+  fetch(HOJA + (HOJA.includes("?") ? "&" : "?") + "t=" + Date.now())
+    .then(r => r.ok ? r.text() : Promise.reject())
+    .then(t => { const list = fromSheet(t); if(!list.length) return; P = list; buildTabs(); cleanCart(); save(); render(); drawCart(); })
+    .catch(() => {});
+}
 </script>
 
 </body>

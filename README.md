@@ -27,7 +27,9 @@ const WHATSAPP = "";   // ejemplo: "34600123456"
 
 Si queda vacío, los botones llevan a Instagram.
 
-**Productos y precios.** En `index.html` busca `const P = [`. Cada producto es una línea:
+**Productos y precios desde una hoja de Google (recomendado).** Sube `Catalogo-KM-Find-Madrid.xlsx` a Google Drive, ábrelo como Hoja de cálculo de Google, publica la pestaña "Productos" como CSV (Archivo → Compartir → Publicar en la web) y pega ese enlace en `const HOJA = "";`. Desde ahí, cualquier cambio en la hoja aparece en la página en unos minutos.
+
+**Productos y precios en el código (respaldo).** En `index.html` busca `const P = [`. Cada producto es una línea:
 
 ```js
 {c:"bolsos", b:"Michael Kors", n:"Bandolera Gigi", img:"bolso1", p:580000},
